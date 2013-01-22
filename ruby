@@ -41,8 +41,9 @@ if [ "$1" == "-h" -o "$1" == "--help" ]; then
   else
     JRUBY_STRING="$JRUBY_STRING Not Installed (install with 'yum install jruby')"
   fi
-  echo "This is Fedora's multiruby chooser. You can use it to execute
-Ruby programmes with any Fedora Ruby runtime. These currently include:
+  echo "This is Fedora's rubypick - a Ruby runtime chooser. You can use it
+to execute Ruby programmes with any Fedora Ruby runtime.
+These currently include:
 
 $MRI_STRING
 $JRUBY_STRING
@@ -56,7 +57,7 @@ To run Ruby executables with shebang, such as 'gem', you can also use these:
 gem _mri_ install foo
 gem _jruby_ install foo
 
-If you don't want to use multiruby, you can always fall back to
+If you don't want to use rubypick, you can always fall back to
 using the above binaries.
 
 Printing help for $INTERPRETER:
