@@ -1,41 +1,45 @@
 #!/usr/bin/bash
-MRI=/usr/bin/ruby-mri
-JRUBY=/usr/bin/jruby
+declare -A INTERPRETER_LIST
+INTERPRETER_LIST=([_jruby_]=/usr/bin/jruby [_mri_]=/usr/bin/ruby-mri)
 INTERPRETER=""
 
-if [ -e $MRI ]; then
-  INTERPRETER=$MRI
-elif [ -e $JRUBY ]; then
-  INTERPRETER=$JRUBY
+# explicitly list interpreters - order matters here
+for i in _mri_ _jruby_; do
+  if [ -e ${INTERPRETER_LIST[$i]} ]; then
+    INTERPRETER=${INTERPRETER_LIST[$i]}
+    break
+  fi
+done
+
+# allow choosing interpreter by RUBYPICK env variable
+if [ -n "$RUBYPICK" ]; then
+  if [ -n ${INTERPRETER_LIST[$RUBYPICK]} ]; then
+    INTERPRETER=${INTERPRETER_LIST[$RUBYPICK]}
+  else
+    echo "Wrong" >&2
+  fi
 fi
 
 FIRST_PARAM=""
 
-if [ "$1" == "_mri_" ]; then
-  INTERPRETER=$MRI
+if [ -n "$1" ] && [ -n "${INTERPRETER_LIST[$1]}" ]; then
+  INTERPRETER=${INTERPRETER_LIST[$1]}
   shift 1
-elif [ "$2" == "_mri_" ]; then
+elif [ -n "$2" ] && [ -n "${INTERPRETER_LIST[$2]}" ]; then
   FIRST_PARAM=$1
-  INTERPRETER=$MRI
-  shift 2
-elif [ "$1" == "_jruby_" ]; then
-  INTERPRETER=$JRUBY
-  shift 1
-elif [ "$2" == "_jruby_" ]; then
-  FIRST_PARAM=$1
-  INTERPRETER=$JRUBY
+  INTERPRETER=${INTERPRETER_LIST[$2]}
   shift 2
 fi
 
 if [ "$1" == "-h" -o "$1" == "--help" ]; then
-  MRI_STRING="Ruby - binary $MRI -"
+  MRI_STRING="Ruby - binary ${INTERPRETER_LIST[_mri_]} -"
   if [ -e $MRI ]; then
     MRI_STRING="$MRI_STRING Installed"
   else
     MRI_STRING="$MRI_STRING Not Installed (install with 'yum install ruby')"
   fi
 
-  JRUBY_STRING="JRuby - binary $JRUBY - "
+  JRUBY_STRING="JRuby - binary ${INTERPRETER_LIST[_jruby_]} - "
   if [ -e $JRUBY ]; then
     JRUBY_STRING="$JRUBY_STRING Installed"
   else
@@ -56,6 +60,12 @@ The default is _mri_.
 To run Ruby executables with shebang, such as 'gem', you can also use these:
 gem _mri_ install foo
 gem _jruby_ install foo
+
+Or you can set environment variable RUBYPICK like this:
+RUBYPICK=_mri_
+RUBYPICK=_jruby_
+and then MRI, resp. JRuby will be used for all ruby invocations.
+This is still overriden by using the parameter as mentioned above.
 
 If you don't want to use rubypick, you can always fall back to
 using the above binaries.
