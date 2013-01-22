@@ -13,10 +13,10 @@ done
 
 # allow choosing interpreter by RUBYPICK env variable
 if [ -n "$RUBYPICK" ]; then
-  if [ -n ${INTERPRETER_LIST[$RUBYPICK]} ]; then
+  if [ -n "${INTERPRETER_LIST[$RUBYPICK]}" ]; then
     INTERPRETER=${INTERPRETER_LIST[$RUBYPICK]}
   else
-    echo "Wrong" >&2
+    echo "Wrong value of RUBYPICK env variable. Ignoring." >&2
   fi
 fi
 
