@@ -82,4 +82,4 @@ elif [ ! -e "$INTERPRETER" ]; then
   exit 124
 fi
 
-$INTERPRETER $FIRST_PARAM "$@"
+exec $INTERPRETER $FIRST_PARAM "$@"
