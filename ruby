@@ -33,14 +33,14 @@ fi
 
 if [ "$1" == "-h" -o "$1" == "--help" ]; then
   MRI_STRING="Ruby - binary ${INTERPRETER_LIST[_mri_]} -"
-  if [ -e $MRI ]; then
+  if [ -e ${INTERPRETER_LIST[_mri_]} ]; then
     MRI_STRING="$MRI_STRING Installed"
   else
     MRI_STRING="$MRI_STRING Not Installed (install with 'yum install ruby')"
   fi
 
   JRUBY_STRING="JRuby - binary ${INTERPRETER_LIST[_jruby_]} -"
-  if [ -e $JRUBY ]; then
+  if [ -e ${INTERPRETER_LIST[_jruby_]} ]; then
     JRUBY_STRING="$JRUBY_STRING Installed"
   else
     JRUBY_STRING="$JRUBY_STRING Not Installed (install with 'yum install jruby')"
