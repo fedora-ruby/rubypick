@@ -39,7 +39,7 @@ if [ "$1" == "-h" -o "$1" == "--help" ]; then
     MRI_STRING="$MRI_STRING Not Installed (install with 'yum install ruby')"
   fi
 
-  JRUBY_STRING="JRuby - binary ${INTERPRETER_LIST[_jruby_]} - "
+  JRUBY_STRING="JRuby - binary ${INTERPRETER_LIST[_jruby_]} -"
   if [ -e $JRUBY ]; then
     JRUBY_STRING="$JRUBY_STRING Installed"
   else
