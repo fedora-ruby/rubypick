@@ -36,14 +36,14 @@ if [ "$1" == "-h" -o "$1" == "--help" ]; then
   if [ -e ${INTERPRETER_LIST[_mri_]} ]; then
     MRI_STRING="$MRI_STRING Installed"
   else
-    MRI_STRING="$MRI_STRING Not Installed (install with 'yum install ruby')"
+    MRI_STRING="$MRI_STRING Not Installed (install with 'dnf install ruby')"
   fi
 
   JRUBY_STRING="JRuby - binary ${INTERPRETER_LIST[_jruby_]} -"
   if [ -e ${INTERPRETER_LIST[_jruby_]} ]; then
     JRUBY_STRING="$JRUBY_STRING Installed"
   else
-    JRUBY_STRING="$JRUBY_STRING Not Installed (install with 'yum install jruby')"
+    JRUBY_STRING="$JRUBY_STRING Not Installed (install with 'dnf install jruby')"
   fi
   echo "This is Fedora's rubypick - a Ruby runtime chooser. You can use it
 to execute Ruby programmes with any Fedora Ruby runtime.
@@ -75,10 +75,10 @@ Printing help for $INTERPRETER:
 fi
 
 if [ -z "$INTERPRETER" ]; then
-  echo "No Ruby interpreter is installed, use 'yum install jruby' or 'yum install ruby'." >&2
+  echo "No Ruby interpreter is installed, use 'dnf install jruby' or 'dnf install ruby'." >&2
   exit 123
 elif [ ! -e "$INTERPRETER" ]; then
-  echo "Couldn't find $INTERPRETER, use 'yum install $INTERPRETER' to install it." >&2
+  echo "Couldn't find $INTERPRETER, use 'dnf install $INTERPRETER' to install it." >&2
   exit 124
 fi
 
