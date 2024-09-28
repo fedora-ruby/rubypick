@@ -2,7 +2,7 @@ rubypick
 =========
 
 Fedora /usr/bin/ruby stub to allow choosing Ruby runtime. Similarly to
-[rbenv] [1] or [RVM] [2], it allows non-privileged user to choose which
+[rbenv][1] or [RVM][2], it allows non-privileged user to choose which
 is preferred Ruby runtime for current task.
 
 Supported Runtimes
